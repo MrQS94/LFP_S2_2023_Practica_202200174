@@ -19,7 +19,7 @@ def menu():
         if opcion == '1':
             print(handler_producto.cargar_inventario_desde_archivo())
         elif opcion == '2':
-            handler_producto.imprimir_inventario()
+            handler_producto.cargar_instrucciones_de_movimiento()
         elif opcion == '3':
             print('Hola')
         elif opcion == '4':
