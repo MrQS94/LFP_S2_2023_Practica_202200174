@@ -6,7 +6,7 @@ class Producto_DAO():
     def __init__(self):
         self.inventario = []
     
-    def cargar_inventario_desde_archivo(self):
+    def cargar_inventario_inicial(self):
         try:
             texto = ''
             with open(os.getcwd() + "\\Lab LFP\\Practica 1\\data_inventario.inv" , 'r', encoding='UTF-8') as archivo:

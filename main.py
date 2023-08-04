@@ -17,14 +17,12 @@ def menu():
         opcion = input('Ingrese una opción: ')
         print('-' * 20)
         if opcion == '1':
-            print(handler_producto.cargar_inventario_desde_archivo())
+            print(handler_producto.cargar_inventario_inicial())
         elif opcion == '2':
             handler_producto.cargar_instrucciones_de_movimiento()
         elif opcion == '3':
             handler_producto.crear_informe_de_inventario()
         elif opcion == '4':
-            handler_producto.imprimir_inventario()
-        elif opcion == '0':
             print('Saliendo del programa')
             break
         else:
