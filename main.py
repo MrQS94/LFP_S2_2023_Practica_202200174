@@ -1,5 +1,4 @@
 from ProductoDAO import Producto_DAO
-import os
 
 handler_producto = Producto_DAO()
 
@@ -18,7 +17,7 @@ def menu():
         opcion = input('Ingrese una opción: ')
         print('-' * 20)
         if opcion == '1':
-            handler_producto.crear_producto()
+            print(handler_producto.cargar_inventario_desde_archivo())
         elif opcion == '2':
             handler_producto.imprimir_inventario()
         elif opcion == '3':
@@ -29,6 +28,5 @@ def menu():
         else:
             print('#### Ingrese una opción correcta ####'.upper())
         print('-' * 20)
-
 
 menu()
