@@ -21,8 +21,10 @@ def menu():
         elif opcion == '2':
             handler_producto.cargar_instrucciones_de_movimiento()
         elif opcion == '3':
-            print('Hola')
+            handler_producto.crear_informe_de_inventario()
         elif opcion == '4':
+            handler_producto.imprimir_inventario()
+        elif opcion == '0':
             print('Saliendo del programa')
             break
         else:

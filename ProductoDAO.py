@@ -41,18 +41,34 @@ class Producto_DAO():
                 nombre, cantidad, ubicacion = detalles.split(';')
                 
                 for producto in self.inventario:
-                    if producto.nombre == nombre:
-                        print('Hola') # Solo queda comparar los demas nombre y ubicaciones
-                        # Seguir probando
-                
-                
-                
-                if instruccion == 'agregar_stock':
-                    print()
-                if instruccion == 'vender_producto':
-                    print()
-    
-    
+                    if producto.ubicacion == ubicacion:
+                        if instruccion == 'agregar_stock':
+                            producto.cantidad += int(cantidad)
+                            print('El stock ha sido actualizado.')
+                            return True
+                        elif instruccion == 'vender_producto':
+                            if producto.cantidad >= int(cantidad):
+                                producto.cantidad -= int(cantidad)
+                                print('El producto ha sido vendido.')
+                                return True
+                            else:
+                                print('La cantidad del producto es mayor al stock existente.')
+                                return False
+                        else:
+                            print('La instrucción no ha sido escrita de una forma correcta.')
+                            print('Recuerde usar \"agregar_stock\" o \"vender_producto\".')
+                            return False
+                                
+                print('El producto no existe en está ubicación o tiene un nombre diferente.')
+                return False
+            
+    def crear_informe_de_inventario(self):
+        with open(os.getcwd() + "\\Lab LFP\\Practica 1\\resultado_123123.txt" , 'a', encoding='UTF-8') as archivo:
+            archivo.write("Informe de Inventario:\n")
+            archivo.write("Producto\t\t\tCantidad\t\t\tPrecio Unitario\t\t\tValor Total\t\t\tUbicación\n")
+            for producto in self.inventario:
+                archivo.write(f'{producto.nombre}\t\t\t\t\t{producto.cantidad}\t\t\t\t\t{producto.precio_unitario}\t\t\t\t\t{int(producto.cantidad) * float(producto.precio_unitario)}\t\t\t\t\t{producto.ubicacion}\n')
+            archivo.close()
     
     
     def imprimir_inventario(self):
