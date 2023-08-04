@@ -1,7 +1,24 @@
 from ProductoDAO import Producto_DAO
+import os
+
+handler_producto = Producto_DAO()
 
 def menu():
-    print('-' * 45)
+    with open(os.getcwd() + "\\Lab LFP\\Practica 1\\data.inv" , 'r', encoding='UTF-8') as archivo:
+        lineas = archivo.readlines()
+        contador = 0
+        for linea in lineas:
+            contador += 1
+            print(contador)
+            print(linea.strip())
+        
+    
+    
+    
+    
+    
+    
+    """print('-' * 45)
     print('Practica 1 - Lenguajes Formales y de Programación')
     print('-' * 45)
     print('# Sistema de inventario: ')
@@ -15,9 +32,9 @@ def menu():
         opcion = input('Ingrese una opción: ')
         print('-' * 20)
         if opcion == '1':
-            print('Hola')
+            handler_producto.crear_producto()
         elif opcion == '2':
-            print('Hola')
+            handler_producto.imprimir_inventario()
         elif opcion == '3':
             print('Hola')
         elif opcion == '4':
@@ -25,6 +42,7 @@ def menu():
             break
         else:
             print('#### Ingrese una opción correcta ####'.upper())
-        print('-' * 20)
-        
+        print('-' * 20)"""
+
+
 menu()
