@@ -1,4 +1,4 @@
-from ProductoDAO import Producto_DAO
+from Producto_DAO import Producto_DAO
 
 handler_producto = Producto_DAO()
 

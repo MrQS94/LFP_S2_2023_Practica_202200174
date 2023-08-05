@@ -1,4 +1,4 @@
-from Product import Producto
+from Producto import Producto
 from io import open
 import os
 
