@@ -1,3 +1,5 @@
 crear_producto Manzana;15;1.00;BodegaA
 crear_producto Peras;50;3.00;BodegaB
 crear_producto Platanos;75;1.75;BodegaC
+crear_producto Pastas;10;5,BodegaD
+crear_producto Cereales;15;10;BodegaE
