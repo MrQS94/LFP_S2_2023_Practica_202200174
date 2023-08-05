@@ -13,20 +13,21 @@ def menu():
         print('2. Cargar instrucciones de movimientos.')
         print('3. Crear informe de inventario.')
         print('4. Salir.')
-        print('-' * 20)
+        print('-' * 30)
         opcion = input('Ingrese una opción: ')
-        print('-' * 20)
+        print('-' * 30)
+        print()
         if opcion == '1':
-            print(handler_producto.cargar_inventario_inicial())
+            handler_producto.cargar_inventario_inicial()
         elif opcion == '2':
             handler_producto.cargar_instrucciones_de_movimiento()
         elif opcion == '3':
             handler_producto.crear_informe_de_inventario()
         elif opcion == '4':
-            print('Saliendo del programa')
+            print('Saliendo del programa...')
             break
         else:
             print('#### Ingrese una opción correcta ####'.upper())
-        print('-' * 20)
-
+        print()
+        print('-' * 30)
 menu()

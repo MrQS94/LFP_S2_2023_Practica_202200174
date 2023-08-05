@@ -8,7 +8,6 @@ class Producto_DAO():
     
     def cargar_inventario_inicial(self):
         try:
-            texto = ''
             with open(os.getcwd() + "\\Lab LFP\\Practica 1\\data_inventario.inv" , 'r', encoding='UTF-8') as archivo:
                 lineas = archivo.readlines()
                 for linea in lineas:
@@ -22,9 +21,9 @@ class Producto_DAO():
                         nombre, cantidad, precio_unitario, ubicacion = detalles.split(';')
                         nuevo_producto = Producto(nombre, cantidad, precio_unitario, ubicacion)
                         self.inventario.append(nuevo_producto)
-                        texto = 'Inventario actualizado exitosamente.'
-            
-            return texto
+                        print(f'El producto {nombre} y ubicación {ubicacion}, ha sido agregado existosamente.')
+                    else:
+                        print(f'Error, El producto {nombre} y ubicación {ubicacion}, no han sido agregados.')
         except FileNotFoundError:
             print('El archivo .inv no se encontró. Verifica la ubicación del archivo.')    
     
@@ -37,49 +36,45 @@ class Producto_DAO():
                 except ValueError:
                     print('EL archivo .mov está mal escrito.')
                     print('Recordar usar el siguiente ejemplo:')
-                    print('crear_producto <nombre>;<cantidad>;<precio_unitario>;<ubicacion>')
-                nombre, cantidad, ubicacion = detalles.split(';')
+                    print('agregar_stock <nombre>;<cantidad>;<ubicacion>')
+                    print('vender_producto <nombre>;<cantidad>;<ubicacion>')
+                nombre, cantidad, ubicacion = detalles.strip().split(';')
                 
-                for producto in self.inventario:
-                    if producto.ubicacion == ubicacion:
-                        if instruccion == 'agregar_stock':
-                            producto.cantidad += int(cantidad)
-                            print('El stock ha sido actualizado.')
-                            return True
-                        elif instruccion == 'vender_producto':
-                            if producto.cantidad >= int(cantidad):
-                                producto.cantidad -= int(cantidad)
-                                print('El producto ha sido vendido.')
-                                return True
+                if instruccion == 'vender_producto':
+                    for producto in self.inventario:
+                        if producto.ubicacion == ubicacion:
+                            if producto.nombre == nombre:
+                                if producto.cantidad >= int(cantidad):
+                                    cantidad_temp = producto.cantidad
+                                    producto.cantidad -= int(cantidad)
+                                    print(f'El producto {nombre} y ubicación {ubicacion}, ha actualizado su stock de {cantidad_temp} a {producto.cantidad}.')
+                                else:
+                                    print(f'Error, El producto {nombre} y ubicación {ubicacion}, tiene un stock menor al deseado.')
                             else:
-                                print('La cantidad del producto es mayor al stock existente.')
-                                return False
-                        else:
-                            print('La instrucción no ha sido escrita de una forma correcta.')
-                            print('Recuerde usar \"agregar_stock\" o \"vender_producto\".')
-                            return False
-                                
-                print('El producto no existe en está ubicación o tiene un nombre diferente.')
-                return False
-            
+                                print(f'Error, No existe un producto ({nombre}), en esta ubicación ({ubicacion})')
+                elif instruccion == 'agregar_stock':
+                    for producto in self.inventario:
+                        if producto.ubicacion == ubicacion:
+                            if producto.nombre == nombre:
+                                cantidad_temp = producto.cantidad
+                                producto.cantidad += int(cantidad)
+                                print(f'El producto {nombre} y ubicación {ubicacion}, ha actualizado su stock de {cantidad_temp} a {producto.cantidad}.')
+                            else:
+                                print(f'Error, No existe un producto ({nombre}), en esta ubicación ({ubicacion})')
+                else:
+                    print('Verifique que su archivo tenga la siguiente estructura.')
+                    print('agregar_stock <nombre>;<cantidad>;<ubicacion>')
+                    print('ó')
+                    print('vender_producto <nombre>;<cantidad>;<ubicacion>')
+                    input('Presione una tecla para continuar...')
+                    
     def crear_informe_de_inventario(self):
-        with open(os.getcwd() + "\\Lab LFP\\Practica 1\\resultado_123123.txt" , 'a', encoding='UTF-8') as archivo:
+        ruta = os.getcwd() + "\\Lab LFP\\Practica 1\\resultado_123123.txt"
+        with open(ruta , 'a', encoding='UTF-8') as archivo:
             archivo.write("Informe de Inventario:\n")
             archivo.write("Producto\t\t\tCantidad\t\t\tPrecio Unitario\t\t\tValor Total\t\t\tUbicación\n")
             for producto in self.inventario:
-                archivo.write(f'{producto.nombre}\t\t\t\t\t{producto.cantidad}\t\t\t\t\t{producto.precio_unitario}\t\t\t\t\t{int(producto.cantidad) * float(producto.precio_unitario)}\t\t\t\t\t{producto.ubicacion}\n')
+                archivo.write(f'{producto.nombre}\t\t\t\t\t{producto.cantidad}\t\t\t\t\t${producto.precio_unitario}\t\t\t\t\t${int(producto.cantidad) * float(producto.precio_unitario)}\t\t\t\t\t{producto.ubicacion}\n')
             archivo.close()
-    
-    
-    def imprimir_inventario(self):
-        i = 0
-        for producto in self.inventario:
-            i += 1
-            print('---------------- ', i, ' ----------------')
-            print('Nombre: ', producto.nombre)
-            print('Cantidad: ', producto.cantidad)
-            print('Precio Unitario: ', producto.precio_unitario)
-            print('Ubicacion: ', producto.ubicacion)
-            print()
-            
-    
+            print('El informe del inventario ha sido cread o actualizado en la siguiente ruta:')
+            print(ruta)
