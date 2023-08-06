@@ -2,7 +2,6 @@ from Producto import Producto
 from io import open
 import os
 
-
 class Producto_DAO():
     def __init__(self):
         self.inventario = []
@@ -30,9 +29,11 @@ class Producto_DAO():
                     else:
                         print(
                             f'Error, El producto {nombre} y ubicación {ubicacion}, no han sido agregados.')
+            inventario_ordenado = sorted(self.inventario, key=lambda producto:(producto.ubicacion, producto.nombre))
+            self.inventario = inventario_ordenado
         except FileNotFoundError:
             print('El archivo .inv no se encontró. Verifica la ubicación del archivo.')
-
+    
     def cargar_instrucciones_de_movimiento(self):
         with open(os.getcwd() + "\\Lab LFP\\LFP_S2_2023_Practica_202200174\\data_movimiento.mov", 'r', encoding='UTF-8') as archivo:
             lineas = archivo.readlines()
@@ -45,7 +46,7 @@ class Producto_DAO():
                     print('agregar_stock <nombre>;<cantidad>;<ubicacion>')
                     print('vender_producto <nombre>;<cantidad>;<ubicacion>')
                 nombre, cantidad, ubicacion = detalles.strip().split(';')
-
+                
                 if instruccion == 'vender_producto':
                     for producto in self.inventario:
                         if producto.ubicacion == ubicacion:
