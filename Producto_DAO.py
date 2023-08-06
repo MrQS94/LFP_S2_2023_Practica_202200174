@@ -2,13 +2,15 @@ from Producto import Producto
 from io import open
 import os
 
+ruta = os.getcwd() + "\\Lab LFP\\LFP_S2_2023_Practica_202200174\\"
+
 class Producto_DAO():
     def __init__(self):
         self.inventario = []
 
     def cargar_inventario_inicial(self):
         try:
-            with open(os.getcwd() + "\\Lab LFP\\LFP_S2_2023_Practica_202200174\\data_inventario.inv", 'r', encoding='UTF-8') as archivo:
+            with open(f"{ruta}data_inventario.inv", 'r', encoding='UTF-8') as archivo:
                 lineas = archivo.readlines()
                 for linea in lineas:
                     try:
@@ -35,7 +37,7 @@ class Producto_DAO():
             print('El archivo .inv no se encontró. Verifica la ubicación del archivo.')
     
     def cargar_instrucciones_de_movimiento(self):
-        with open(os.getcwd() + "\\Lab LFP\\LFP_S2_2023_Practica_202200174\\data_movimiento.mov", 'r', encoding='UTF-8') as archivo:
+        with open(f"{ruta}data_movimiento.mov", 'r', encoding='UTF-8') as archivo:
             lineas = archivo.readlines()
             for linea in lineas:
                 try:
@@ -76,8 +78,8 @@ class Producto_DAO():
             
     
     def crear_informe_de_inventario(self):
-        ruta = os.getcwd() + "\\Lab LFP\\LFP_S2_2023_Practica_202200174\\resultado_123123.txt"
-        with open(ruta, 'a', encoding='UTF-8') as archivo:
+        ruta_ = f"{ruta}resultado_123123.txt"
+        with open(ruta_, 'a', encoding='UTF-8') as archivo:
             archivo.write("Informe de Inventario:\n")
             archivo.write(
                 "Producto\t\t\tCantidad\t\t\tPrecio Unitario\t\t\tValor Total\t\t\tUbicación\n")
@@ -89,4 +91,4 @@ class Producto_DAO():
             archivo.close()
             print(
                 'El informe del inventario ha sido cread o actualizado en la siguiente ruta:')
-            print(ruta)
+            print(ruta_)
