@@ -9,7 +9,7 @@ class Producto_DAO():
 
     def cargar_inventario_inicial(self):
         try:
-            with open(os.getcwd() + "\\Lab LFP\\Practica 1\\data_inventario.inv", 'r', encoding='UTF-8') as archivo:
+            with open(os.getcwd() + "\\Lab LFP\\LFP_S2_2023_Practica_202200174\\data_inventario.inv", 'r', encoding='UTF-8') as archivo:
                 lineas = archivo.readlines()
                 for linea in lineas:
                     try:
@@ -34,7 +34,7 @@ class Producto_DAO():
             print('El archivo .inv no se encontró. Verifica la ubicación del archivo.')
 
     def cargar_instrucciones_de_movimiento(self):
-        with open(os.getcwd() + "\\Lab LFP\\Practica 1\\data_movimiento.mov", 'r', encoding='UTF-8') as archivo:
+        with open(os.getcwd() + "\\Lab LFP\\LFP_S2_2023_Practica_202200174\\data_movimiento.mov", 'r', encoding='UTF-8') as archivo:
             lineas = archivo.readlines()
             for linea in lineas:
                 try:
@@ -80,7 +80,7 @@ class Producto_DAO():
                     input('Presione una tecla para continuar...')
 
     def crear_informe_de_inventario(self):
-        ruta = os.getcwd() + "\\Lab LFP\\Practica 1\\resultado_123123.txt"
+        ruta = os.getcwd() + "\\Lab LFP\\LFP_S2_2023_Practica_202200174\\resultado_123123.txt"
         with open(ruta, 'a', encoding='UTF-8') as archivo:
             archivo.write("Informe de Inventario:\n")
             archivo.write(
