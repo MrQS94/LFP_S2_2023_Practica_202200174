@@ -2,15 +2,15 @@ from Producto import Producto
 from io import open
 import os
 
-ruta = os.getcwd() + "\\Lab LFP\\LFP_S2_2023_Practica_202200174\\"
-
 class Producto_DAO():
     def __init__(self):
         self.inventario = []
+        self.ruta = os.getcwd()
+        self.contador = 0
 
-    def cargar_inventario_inicial(self):
+    def cargar_inventario_inicial(self, ruta):
         try:
-            with open(f"{ruta}data_inventario.inv", 'r', encoding='UTF-8') as archivo:
+            with open(ruta, 'r', encoding='UTF-8') as archivo:
                 lineas = archivo.readlines()
                 for linea in lineas:
                     try:
@@ -36,8 +36,8 @@ class Producto_DAO():
         except FileNotFoundError:
             print('El archivo .inv no se encontró. Verifica la ubicación del archivo.')
     
-    def cargar_instrucciones_de_movimiento(self):
-        with open(f"{ruta}data_movimiento.mov", 'r', encoding='UTF-8') as archivo:
+    def cargar_instrucciones_de_movimiento(self, ruta):
+        with open(ruta, 'r', encoding='UTF-8') as archivo:
             lineas = archivo.readlines()
             for linea in lineas:
                 try:
@@ -78,7 +78,8 @@ class Producto_DAO():
             
     
     def crear_informe_de_inventario(self):
-        ruta_ = f"{ruta}resultado_123123.txt"
+        ruta_ = f"{self.ruta}\\resultado_{self.contador}.txt"
+        self.contador += 1
         with open(ruta_, 'a', encoding='UTF-8') as archivo:
             archivo.write("Informe de Inventario:\n")
             archivo.write(
