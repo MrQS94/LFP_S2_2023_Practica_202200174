@@ -3,7 +3,7 @@ Nombre Completo: Andres Alejandro Quezada Cabrera
 
 Carné: 202200174
 
-Curso y Sección = Introducción a la Programción y Computación 2 - Sección "D"
+Curso y Sección = Lenguajes Formales y de Programación - Sección "B+"
 
 Carrera: Ingenieria en Ciencias y Sistemas
 
