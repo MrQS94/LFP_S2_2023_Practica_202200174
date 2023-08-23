@@ -23,8 +23,7 @@ class Producto_DAO():
                     except ValueError:
                         print('EL archivo .inv está mal escrito.')
                         print('Recordar usar el siguiente ejemplo:')
-                        print(
-                            'crear_producto <nombre>;<cantidad>;<precio_unitario>;<ubicacion>')
+                        print('crear_producto <nombre>;<cantidad>;<precio_unitario>;<ubicacion>')
                     if instruccion == 'crear_producto':
                         nombre, cantidad, precio_unitario, ubicacion = detalles.split(';')
                         nuevo_producto = Producto(nombre, cantidad, precio_unitario, ubicacion)
@@ -105,8 +104,8 @@ class Producto_DAO():
             archivo.write('-'*105)
             archivo.write('\n')
             for producto_inicial in self.inventario_inicial:
-                archivo.write( f'{producto_inicial.nombre}\t\t\t\t\t{producto_inicial.cantidad}\t\t\t\t\t${producto_inicial.precio_unitario}\t\t\t\t\t${int(producto_inicial.cantidad) * float(producto_inicial.precio_unitario)}\t\t\t\t\t{producto_inicial.ubicacion}\n')
+                archivo.write(f'{producto_inicial.nombre}\t\t\t\t\t{producto_inicial.cantidad}\t\t\t\t\t${producto_inicial.precio_unitario}\t\t\t\t\t${int(producto_inicial.cantidad) * float(producto_inicial.precio_unitario)}\t\t\t\t\t{producto_inicial.ubicacion}\n')
             archivo.close()
         
         print('El informe del inventario ha sido cread o actualizado en la siguiente ruta:')
-        print(ruta_)
+        print(self.ruta)
